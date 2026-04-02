@@ -1,0 +1,74 @@
+{
+  "$schema": "./verdict.schema.json",
+  "instance_id": "wespeaker_20260402",
+  "timestamp": "2026-04-02T17:31:58Z",
+  "model_id": "wenet-e2e/wespeaker",
+  "status": "failed",
+  "backend": {
+    "type": "pip",
+    "choice_reason": "A model-local Python 3.10 venv was the lowest-risk executable backend on this host and matched the upstream pip workflow."
+  },
+  "build": {
+    "success": true,
+    "duration_seconds": 0,
+    "log_path": "artifacts/build.log"
+  },
+  "validation": {
+    "import_test": {
+      "passed": false,
+      "duration_ms": 0,
+      "error": "ModuleNotFoundError: No module named 'whisper'"
+    },
+    "load_test": {
+      "passed": false,
+      "duration_ms": 0,
+      "error": "Blocked by import failure"
+    },
+    "infer_test": {
+      "passed": false,
+      "duration_ms": 0,
+      "error": "Blocked by import failure"
+    },
+    "contract_test": {
+      "passed": false,
+      "duration_ms": 0,
+      "error": "Blocked by import failure"
+    }
+  },
+  "retries": {
+    "count": 3,
+    "history": [
+      {
+        "attempt": 1,
+        "checkpoint": "VALIDATE_IMPORT",
+        "failure_type": "python_dependency_missing",
+        "mitigation": "Installed s3prl after import failed on an eager optional frontend dependency."
+      },
+      {
+        "attempt": 2,
+        "checkpoint": "VALIDATE_IMPORT",
+        "failure_type": "runtime_backend_incompatible",
+        "mitigation": "Pinned torch==2.1.2 and torchaudio==2.1.2 after s3prl hit a removed torchaudio API under torchaudio 2.11.0."
+      },
+      {
+        "attempt": 3,
+        "checkpoint": "VALIDATE_IMPORT",
+        "failure_type": "python_dependency_missing",
+        "mitigation": "Stopped and escalated when import exposed another undeclared optional frontend dependency (`whisper`)."
+      }
+    ]
+  },
+  "failure": {
+    "type": "python_dependency_missing",
+    "category": "repeated_unresolved_failure",
+    "message": "wespeaker import still requires undeclared optional frontend dependency `whisper` before the minimal speaker verification path can even import. Further dependency expansion would exceed the bounded retry policy.",
+    "retryable": false
+  },
+  "artifacts": {
+    "spec_path": "model.spec.yaml",
+    "wrapper_path": null,
+    "lockfile_path": "artifacts/pip_freeze.txt",
+    "log_path": "artifacts/validation.log"
+  },
+  "notes": "Phase-1 stopped at VALIDATE_IMPORT. No wrapper was generated because VALIDATE_CONTRACT did not pass. Human escalation was triggered after repeated unresolved import-stage failures."
+}
