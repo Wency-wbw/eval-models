@@ -10,7 +10,7 @@ WeSpeaker speaker verification phase-1 onboarding record for SURE-EVAL.
 - **Task**: Speaker Verification
 - **Deployment**: Local
 - **Phase-1 Status**: Failed at `VALIDATE_IMPORT`
-- **Final Verdict**: See [artifacts/verdict.json](./artifacts/verdict.json)
+- **Final Verdict**: See [verdict.json](./verdict.json)
 
 ## Phase-1 Target
 
@@ -88,23 +88,6 @@ Because the same checkpoint kept exposing new optional frontend dependencies, th
 - `commit: null` increases volatility because newer frontend additions can widen the `import wespeaker` dependency surface.
 - No weights were downloaded in this run because import never completed, so `wespeaker.load_model("english")` never started.
 
-## Generated Artifacts
-
-Required/conditional artifacts for this failed run are under [artifacts](./artifacts/):
-
-- [artifacts/verdict.json](./artifacts/verdict.json)
-- [artifacts/validation.log](./artifacts/validation.log)
-- [artifacts/build.log](./artifacts/build.log)
-- [artifacts/weights_manifest.json](./artifacts/weights_manifest.json)
-- [artifacts/backend_choice.json](./artifacts/backend_choice.json)
-- [artifacts/build_plan.json](./artifacts/build_plan.json)
-- [artifacts/spec_validation.json](./artifacts/spec_validation.json)
-- [artifacts/failure_classification.json](./artifacts/failure_classification.json)
-- [artifacts/retry_recommendation.json](./artifacts/retry_recommendation.json)
-- [artifacts/escalation.json](./artifacts/escalation.json)
-- [artifacts/pip_freeze.txt](./artifacts/pip_freeze.txt)
-
-Wrapper files were not generated in this run because `VALIDATE_CONTRACT` never passed.
 
 ## Recommended Next Steps
 
